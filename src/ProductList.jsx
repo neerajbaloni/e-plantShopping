@@ -257,6 +257,13 @@ const handlePlantsClick = (e) => {
     setShowCart(false);
   };
 
+  const removeFromCart = (name)=> {
+    setAddedToCart((prevState) => ({
+        ...prevState,
+        [name]: false,
+      }));
+  }
+
   const handleAddToCart = (product) => {
     if(addedToCart[product.name]) return;
     dispatch(addItem(product));
@@ -266,7 +273,6 @@ const handlePlantsClick = (e) => {
      }));
   };
   const calculateItemCount = () => {
-    console.log(cartItems);
     let count = 0
     cartItems.forEach( item=> {
         count += item.quantity;
@@ -322,7 +328,7 @@ const handlePlantsClick = (e) => {
 
         </div>
  ) :  (
-    <CartItem onContinueShopping={handleContinueShopping}/>
+    <CartItem onContinueShopping={handleContinueShopping} removeFromCart={removeFromCart}/>
 )}
     </div>
     );
